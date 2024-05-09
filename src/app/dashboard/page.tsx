@@ -40,6 +40,7 @@ export default async function Dashboard() {
         <table className="min-w-full my-2">
           <thead>
             <tr>
+              <th className="font-medium text-left">Nome</th>
               <th className="font-medium text-left">Cliente</th>
               <th className="font-medium text-left">Cadastro</th>
               <th className="font-medium text-left">Status</th>
@@ -57,6 +58,12 @@ export default async function Dashboard() {
             ))}
           </tbody>
         </table>
+
+        {tickets.length === 0 && (
+          <h1 className="px-2 md:px-0 text-gray-600">
+            Nenhum chamado aberto...
+          </h1>
+        )}
       </main>
     </Container>
   );
