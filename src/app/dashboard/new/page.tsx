@@ -30,7 +30,6 @@ export default async function NewTicket() {
       throw new Error("Missing fields");
     }
 
-    // try {
     await prismaClient.ticket.create({
       data: {
         name: name as string,
@@ -42,9 +41,6 @@ export default async function NewTicket() {
     });
 
     redirect("/dashboard");
-    // } catch (error) {
-    //   throw new Error("Error creating ticket");
-    // }
   }
 
   return (

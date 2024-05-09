@@ -1,26 +1,31 @@
-import { FiFile, FiTrash2 } from "react-icons/fi";
+import { CustomerProps } from "@/utils/customer.type";
+import { TicketProps } from "@/utils/ticket.type";
+import { FiCheckSquare, FiFile } from "react-icons/fi";
 
-interface TicketProps {
-  client: string;
-  date: Date;
-  status: boolean;
+interface TicketItemProps {
+  ticket: TicketProps;
+  customer: CustomerProps | null;
 }
 
-export function TicketItem() {
+export function TicketItem({ customer, ticket }: TicketItemProps) {
   return (
     <>
       <tr className="border-b-2 border-b-slate-200 h-16 last:border-b-0 bg-slate-100 hover:bg-slate-200 transition-colors">
-        <td className="text-left pl-2">John Doe</td>
-
-        <td className="text-left">01/01/2022</td>
+        <td className="text-left pl-2">{customer?.name}</td>
 
         <td className="text-left">
-          <span className="bg-green-500 px-2 py-1 rounded">Aberto</span>
+          {ticket.created_at?.toLocaleDateString("pt-BR")}
+        </td>
+
+        <td className="text-left">
+          <span className="bg-green-500 px-2 py-1 rounded text-white uppercase">
+            {ticket.status}
+          </span>
         </td>
 
         <td className="text-left space-x-2">
           <button>
-            <FiTrash2 size={24} color="#ef4444" />
+            <FiCheckSquare size={24} color="#131313" />
           </button>
 
           <button>
