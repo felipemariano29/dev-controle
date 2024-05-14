@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { FiSearch, FiX } from "react-icons/fi";
 import { useState } from "react";
 import { FormTicket } from "./components/FormTicket";
+import { api } from "@/lib/api";
 
 const schema = z.object({
   email: z
@@ -17,7 +18,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-interface CustomerProps {
+export interface CustomerProps {
   id: string;
   name: string;
 }
@@ -29,6 +30,7 @@ export default function OpenTicket() {
     register,
     handleSubmit,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -37,6 +39,27 @@ export default function OpenTicket() {
   function handleClearCustomer() {
     setCustomer(null);
     setValue("email", "");
+  }
+
+  async function handleSearchCustomer(data: FormData) {
+    const response = await api.get(`/api/customer`, {
+      params: {
+        email: data.email,
+      },
+    });
+
+    if (!response.data.customer) {
+      setError("email", {
+        type: "custom",
+        message: "Cliente não encontrado",
+      });
+      return;
+    }
+
+    setCustomer({
+      id: response.data.customer.id,
+      name: response.data.customer.name,
+    });
   }
 
   return (
@@ -59,7 +82,10 @@ export default function OpenTicket() {
             </button>
           </div>
         ) : (
-          <form className="bg-slate-100 py-6 px-3 rounded border-2">
+          <form
+            onSubmit={handleSubmit(handleSearchCustomer)}
+            className="bg-slate-100 py-6 px-3 rounded border-2"
+          >
             <div className="flex flex-col gap-3">
               <Input
                 name="email"
@@ -79,7 +105,7 @@ export default function OpenTicket() {
           </form>
         )}
 
-        {customer && <FormTicket />}
+        {customer && <FormTicket customer={customer} />}
       </main>
     </div>
   );

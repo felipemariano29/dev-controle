@@ -3,6 +3,33 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prismaClient from "@/lib/prisma";
 
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const email = searchParams.get("email");
+
+  if (!email || email === "") {
+    return NextResponse.json({ message: "Missing email" }, { status: 400 });
+  }
+
+  try {
+    const customer = await prismaClient.customer.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    return NextResponse.json(
+      { message: "Customer found", customer },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Failed to get customer" },
+      { status: 400 }
+    );
+  }
+}
+
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
 
