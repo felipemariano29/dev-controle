@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dev Controle 🚀
 
-## Getting Started
+## Descrição
 
-First, run the development server:
+O **Dev Controle** é uma aplicação desenvolvida com o objetivo de auxiliar no gerenciamento de clientes e chamados para desenvolvedores. Ele oferece uma plataforma intuitiva e eficiente para criar, acompanhar e fechar chamados de clientes, tudo isso integrado com autenticação via Google para garantir segurança e controle de acesso.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Funcionalidades Principais
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Autenticação via Google**: O Dev Controle permite que os usuários façam login utilizando suas contas do Google, garantindo autenticidade e segurança.
+- **Gerenciamento de Clientes**: Os usuários podem criar e gerenciar clientes, atribuindo a eles detalhes importantes como nome, email, e outras informações relevantes.
+- **Gerenciamento de Chamados**: A aplicação permite a criação e acompanhamento de chamados para cada cliente, com a capacidade de marcar chamados como abertos ou fechados, além de visualizar detalhes adicionais de cada chamado.
+- **Criação de Chamados sem Login**: Mesmo sem estar autenticado, os usuários podem criar chamados fornecendo um email válido do cliente, simplificando o processo de comunicação e registro de solicitações.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tecnologias Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Next.js**: Framework React para renderização do lado do servidor, oferecendo uma experiência de desenvolvimento rápida e eficiente.
+- **Prisma**: ORM moderno para Node.js e TypeScript, utilizado para comunicação com o banco de dados e criação de migrações.
+- **Tailwind CSS**: Framework CSS utilitário que facilita a criação de interfaces responsivas e elegantes.
+- **NextAuth**: Biblioteca de autenticação para Next.js, utilizada para integração com o Google OAuth e controle de acesso.
+- **Zod**: Biblioteca para validação de esquemas em TypeScript, garantindo integridade e consistência nos dados.
 
-## Learn More
+## Estrutura do Projeto
 
-To learn more about Next.js, take a look at the following resources:
+O projeto é estruturado de forma modular, seguindo as melhores práticas de organização de código. As principais partes do projeto incluem:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- prisma: Configurações do ORM.
+- app
+  - **api**: Rotas da API.
+  - **dashboard**: Página principal com chamados abertos e botão para criar um novo.
+  - **customer**: Página para gerenciamento de clientes, com clientes abertos e botão para criar um novo.
+  - **components**: Componentes globais da aplicação.
+  - **lib**: Arquivos de configuração da API, autenticação e Prisma.
+  - **providers**: Wrapper de autenticação e contexto de modal.
+  - **types**: Interfaces e tipos de dados.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contribuição
 
-## Deploy on Vercel
+Contribuições são bem-vindas! Se você tem sugestões de novas funcionalidades, melhorias de código ou encontrou algum problema, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Licença
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Este projeto está licenciado sob a [MIT License](LICENSE).
